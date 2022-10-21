@@ -87,7 +87,7 @@ namespace NAMERP.House
 
         public static (int, int, int, bool) GetHouseInfoByPosition(Position position)
         {
-            House? house = _houseList.OrderBy((el) => position.Distance(el.Location) < 5f).FirstOrDefault();
+            House? house = _houseList.OrderBy((el) => position.Distance(el.Location) <= 2f).FirstOrDefault();
             return house == null ? (0, 0, 0, false) : (house.ID, house.Owner, house.Price, house.Locked);
         }
 
@@ -98,7 +98,7 @@ namespace NAMERP.House
         /// <param name="houseID"></param>
         public static void EnterHouse(IPlayer player, int houseID)
         {
-            House? house = _houseList.Where((el) => el.ID == houseID).First();
+            House? house = _houseList.Where((el) => el.ID == houseID).FirstOrDefault();
             if (house == null || house.Locked)
                 return;
 
@@ -112,11 +112,12 @@ namespace NAMERP.House
         /// <param name="player"></param>
         public static void LeaveHouse(IPlayer player)
         {
-            House? house = _houseList.Where((el) => el.ID == player.Dimension).First();
-            if (house == null)
+            // He isn't in any house
+            if (player.Dimension == 0)
                 return;
 
-            if (player.Position.Distance(_interiors[house.Interior]) > 5f)
+            House? house = _houseList.Where((el) => el.ID == player.Dimension).FirstOrDefault();
+            if (house == null)
                 return;
 
             player.Dimension = 0;

@@ -18,7 +18,7 @@
       <div style="margin-top: 1vw">
         <button :class="[ owner === 0 ? 'green' : 'red' ]">{{ owner === 0 ? 'Kaufen' : 'Verkaufen' }}</button>
         <button :class="[ locked ? 'green' : 'red' ]">{{ locked ? 'Öffnen' : 'Schließen' }}</button>
-        <button>Betreten</button>
+        <button @click="enter()">Betreten</button>
         <button>Garage</button>
       </div>
     </div>
@@ -47,6 +47,11 @@ export default {
       this.price = price;
       this.locked = locked;
     });
+  },
+  methods: {
+    enter() {
+      alt.emit("enter", this.id);
+    }
   }
 }
 </script>

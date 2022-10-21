@@ -31,6 +31,19 @@ alt.everyTick(() => {
   }
 });
 
+function deleteView() {
+  if (view === null)
+    return;
+  
+  view.unfocus();
+  view.destroy();
+  view = null;
+
+  alt.toggleVoiceControls(true);
+  alt.toggleGameControls(true);
+  alt.showCursor(false);
+}
+
 alt.onServer("house:get", (id, owner, price, locked) => {
   if (view !== null)
     return;
@@ -42,6 +55,10 @@ alt.onServer("house:get", (id, owner, price, locked) => {
   alt.showCursor(true);
 
   view = new alt.WebView("http://resource/client/house/html/index.html");
+  view.on("enter", (id) => {
+    alt.emitServer("house:enter", id);
+    deleteView();
+  });
   view.focus();
   view.emit("update", id, owner, price, locked);
 });
@@ -50,15 +67,8 @@ alt.on("keydown", (key) => {
   // Prevent keys when displaying a user interface
   if (!alt.gameControlsEnabled())
   {
-    if (view !== null && key === 27 /* ESC */) {
-      view.unfocus();
-      view.destroy();
-      view = null;
-
-      alt.toggleVoiceControls(true);
-      alt.toggleGameControls(true);
-      alt.showCursor(false);
-    }
+    if (key === 27 /* ESC */)
+      deleteView();
     return;
   }
 
@@ -71,7 +81,7 @@ alt.on("keydown", (key) => {
       continue;
     
     const dist = helper.distance2d(local.pos, blip.pos);
-    if (dist >= 5)
+    if (dist > 2)
       continue;
     
     nearHouse = true;

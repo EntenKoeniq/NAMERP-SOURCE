@@ -24,6 +24,12 @@ namespace NAMERP
             House.API.CreateHouse(player.Position, price, interior);
         }
 
+        [Command("leave")]
+        public static void CMD_LeaveHouse(IPlayer player)
+        {
+            House.API.LeaveHouse(player);
+        }
+
         //[Command("register")]
         //public static void CMD_Register(CPlayer player, string email, string password)
         //{
