@@ -1,0 +1,67 @@
+import * as alt from "alt-client";
+
+let buffer = [];
+
+let loaded = false;
+let opened = false;
+
+var view = null;
+alt.on("showChat", () => {
+  view = new alt.WebView("http://resource/client/chat/html/index.html");
+  view.on("chatloaded", () => {
+    for (const msg of buffer) {
+      addMessage(msg.name, msg.text);
+    }
+  
+    loaded = true;
+  });
+  
+  view.on("chatmessage", (text) => {
+    alt.emitServer("chat:message", text);
+  
+    opened = false;
+    alt.toggleGameControls(true);
+    view.unfocus();
+  });
+});
+alt.on("hideChat", () => {
+  view.destroy();
+  view = null;
+});
+
+function addMessage(name, text) {
+  if (name) {
+    view.emit("addMessage", name, text);
+  } else {
+    view.emit("addString", text);
+  }
+}
+
+alt.onServer("chat:message", (name, text) => {
+  if (!loaded) {
+    buffer.push({ name, text });
+  } else {
+    addMessage(name, text);
+  }
+});
+
+alt.on("keyup", (key) => {
+  if (loaded) {
+    if (!opened && key === 0x54 && alt.gameControlsEnabled()) {
+      opened = true;
+      view.emit("openChat", false);
+      alt.toggleGameControls(false);
+      view.focus();
+    } else if (!opened && key === 0xbf && alt.gameControlsEnabled()) {
+      opened = true;
+      view.emit("openChat", true);
+      alt.toggleGameControls(false);
+      view.focus();
+    } else if (opened && key == 0x1b) {
+      opened = false;
+      view.emit("closeChat");
+      alt.toggleGameControls(true);
+      view.unfocus();
+    }
+  }
+});
