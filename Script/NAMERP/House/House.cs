@@ -1,4 +1,5 @@
 ﻿using AltV.Net.Data;
+using AltV.Net.Elements.Entities;
 
 namespace NAMERP.House
 {
@@ -10,5 +11,7 @@ namespace NAMERP.House
         public int Owner { get; set; } = 0;
         public bool Locked { get; set; } = false;
         public short Interior { get; set; } = 0;
+
+        public IBlip? Blip { get; set; } = null;
     }
 }

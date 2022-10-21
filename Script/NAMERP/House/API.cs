@@ -1,8 +1,7 @@
-﻿using Newtonsoft.Json;
-
-using AltV.Net;
+﻿using AltV.Net;
 using AltV.Net.Data;
 using AltV.Net.Elements.Entities;
+using AltV.Net.Resources.Chat.Api;
 
 using Npgsql;
 
@@ -28,19 +27,13 @@ namespace NAMERP.House
             new Position(1397.072f, 1142.011f, 114.3335f)       // Farm Ultra Luxus - 12
         };
 
-        /// <summary>
-        /// Load all houses for a specific player
-        /// </summary>
-        /// <param name="player">The player receiving the blips</param>
-        public static void LoadAllHouses(IPlayer player)
+        public static IBlip CreateBlip(Position position, int owner)
         {
-            _houseList.ForEach((el) =>
-            {
-                IBlip blip = Alt.CreateBlip(player, (byte)BlipType.Destination, el.Location);
-                blip.Sprite = 411; // House
-                blip.Color = (byte)(el.Owner == 0 ? 1 : 2); // House for sell?
-                blip.Name = "Haus";
-            });
+            IBlip blip = Alt.CreateBlip((byte)BlipType.Destination, position);
+            blip.Sprite = 411; // House
+            blip.Color = (byte)(owner == 0 ? 1 : 2); // House for sell?
+            blip.Name = "Haus";
+            return blip;
         }
 
         /// <summary>
@@ -60,7 +53,8 @@ namespace NAMERP.House
                     Price = rdr.GetInt32(4),
                     Owner = rdr.GetInt32(5),
                     Locked = rdr.GetBoolean(6),
-                    Interior = rdr.GetInt16(7)
+                    Interior = rdr.GetInt16(7),
+                    Blip = CreateBlip(new(rdr.GetFloat(1), rdr.GetFloat(2), rdr.GetFloat(3)), rdr.GetInt32(5))
                 });
             }
             rdr.Close();
@@ -91,24 +85,83 @@ namespace NAMERP.House
             throw new NotImplementedException();
         }
 
-        public static void EnterHouse()
+        /// <summary>
+        /// NOT IMPLEMENTED YET!
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="houseID"></param>
+        public static void EnterHouse(IPlayer player, int houseID)
         {
-            throw new NotImplementedException();
+            House? house = _houseList.Where((el) => el.ID == houseID).First();
+            if (house == null || house.Locked)
+                return;
+
+            player.Dimension = house.ID;
+            player.Position = _interiors[house.Interior];
         }
 
-        public static void LeaveHouse()
+        /// <summary>
+        /// NOT IMPLEMENTED YET!
+        /// </summary>
+        /// <param name="player"></param>
+        public static void LeaveHouse(IPlayer player)
         {
-            throw new NotImplementedException();
+            House? house = _houseList.Where((el) => el.ID == player.Dimension).First();
+            if (house == null)
+                return;
+
+            if (player.Position.Distance(_interiors[house.Interior]) > 5f)
+                return;
+
+            player.Dimension = 0;
+            player.Position = house.Location;
         }
 
-        public static void LockHouse()
+        /// <summary>
+        /// NOT IMPLEMENTED YET!
+        /// </summary>
+        /// <param name="houseID"></param>
+        public static void LockHouse(int houseID)
         {
-            throw new NotImplementedException();
+            House? house = _houseList.Where((el) => el.ID == houseID).First();
+            if (house == null)
+                return;
+
+            house.Locked = !house.Locked;
+
+            NpgsqlCommand cmd = new("UPDATE houses SET locked = @locked WHERE id = @id");
+            cmd.Parameters.AddWithValue("@locked", house.Locked);
+            cmd.Parameters.AddWithValue("@id", house.ID);
+            Database.ExecuteNonQuery(cmd);
         }
 
-        public static void BuyHouse()
+        /// <summary>
+        /// NOT IMPLEMENTED YET!
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="houseID"></param>
+        public static void BuyHouse(CPlayer player, int houseID)
         {
-            throw new NotImplementedException();
+            House? house = _houseList.Where((el) => el.ID == houseID).First();
+            if (house == null)
+                return;
+
+            // House isn't for sell
+            if (house.Owner != 0)
+                return;
+
+            if (!player.SetMoney(house.Price, false))
+            {
+                player.SendChatMessage("{FF0000}Du hast nicht ausreichend Geld auf der Hand!");
+                return;
+            }
+
+            if (!SetOwner(player.ID, house.ID))
+            {
+                // Give the player their money back
+                player.SetMoney(house.Price, true);
+                player.SendChatMessage("{FF0000}Bitte melde dich im Support! Etwas ist beim Kauf schief gelaufen!");
+            }
         }
 
         public static void SellHouse()
@@ -116,9 +169,28 @@ namespace NAMERP.House
             throw new NotImplementedException();
         }
 
-        public static void SetNewOwner()
+        /// <summary>
+        /// NOT IMPLEMENTED YET!
+        /// </summary>
+        /// <param name="playerID"></param>
+        /// <param name="houseID"></param>
+        /// <returns></returns>
+        public static bool SetOwner(int playerID, int houseID)
         {
-            throw new NotImplementedException();
+            House? house = _houseList.Where((el) => el.ID == houseID).First();
+            if (house == null)
+                return false;
+
+            NpgsqlCommand cmd = new("UPDATE houses SET owner = @owner WHERE id = @id");
+            cmd.Parameters.AddWithValue("@owner", playerID);
+            cmd.Parameters.AddWithValue("@id", houseID);
+            Database.ExecuteNonQuery(cmd);
+
+            house.Owner = playerID;
+            if (house.Blip != null)
+                house.Blip.Color = (byte)(house.Owner == 0 ? 1 : 2);
+
+            return true;
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System.Numerics;
 
-using Newtonsoft.Json;
-
 using AltV.Net;
 using AltV.Net.Data;
 using AltV.Net.Elements.Entities;
@@ -176,8 +174,6 @@ namespace NAMERP
 
                 Vehicle.API.LoadPlayerVehicles(player.ID);
                 player.Position = new(0, 0, 0);
-
-                House.API.LoadAllHouses(player);
             }
         }
     }
