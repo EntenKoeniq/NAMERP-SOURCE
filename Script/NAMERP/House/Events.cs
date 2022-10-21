@@ -12,6 +12,8 @@ namespace NAMERP.House
             if (id == 0)
                 return;
 
+
+
             player.Emit("house:get", id, owner, price, locked);
         }
 
