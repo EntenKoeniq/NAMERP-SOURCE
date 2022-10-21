@@ -4,16 +4,16 @@
       <div style="display:flex">
         <div style="margin-right: 1vw">
           <small>ID</small>
-          <p>12345</p>
+          <p>{{ id }}</p>
         </div>
         <div>
           <small>Eigentümer</small>
-          <p>12345</p>
+          <p>{{ owner }}</p>
         </div>
       </div>
       <div style="margin-top: 1vw">
         <small>Preis</small>
-        <p>$ 123456</p>
+        <p>$ {{ price }}</p>
       </div>
       <div style="margin-top: 1vw">
         <button :class="[ owner === 0 ? 'green' : 'red' ]">{{ owner === 0 ? 'Kaufen' : 'Verkaufen' }}</button>
