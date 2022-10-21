@@ -45,7 +45,6 @@ D:\Projekte\NAMERP-SOURCE\Script\NAMERP\bin\Debug\net6.0\AltV.Net.CApi.dll
 D:\Projekte\NAMERP-SOURCE\Script\NAMERP\bin\Debug\net6.0\AltV.Net.Resources.Chat.Api.dll
 D:\Projekte\NAMERP-SOURCE\Script\NAMERP\bin\Debug\net6.0\AltV.Net.Shared.dll
 D:\Projekte\NAMERP-SOURCE\Script\NAMERP\bin\Debug\net6.0\BCrypt.Net-Next.dll
-D:\Projekte\NAMERP-SOURCE\Script\NAMERP\bin\Debug\net6.0\Newtonsoft.Json.dll
 D:\Projekte\NAMERP-SOURCE\Script\NAMERP\bin\Debug\net6.0\Npgsql.dll
 D:\Projekte\NAMERP-SOURCE\Script\NAMERP\obj\Debug\net6.0\NAMERP.csproj.AssemblyReference.cache
 D:\Projekte\NAMERP-SOURCE\Script\NAMERP\obj\Debug\net6.0\NAMERP.GeneratedMSBuildEditorConfig.editorconfig

@@ -85,6 +85,12 @@ namespace NAMERP.House
             throw new NotImplementedException();
         }
 
+        public static (int, int, int, bool) GetHouseInfoByPosition(Position position)
+        {
+            House? house = _houseList.OrderBy((el) => position.Distance(el.Location) < 5f).FirstOrDefault();
+            return house == null ? (0, 0, 0, false) : (house.ID, house.Owner, house.Price, house.Locked);
+        }
+
         /// <summary>
         /// NOT IMPLEMENTED YET!
         /// </summary>
@@ -121,10 +127,10 @@ namespace NAMERP.House
         /// NOT IMPLEMENTED YET!
         /// </summary>
         /// <param name="houseID"></param>
-        public static void LockHouse(int houseID)
+        public static void LockHouse(CPlayer player, int houseID)
         {
             House? house = _houseList.Where((el) => el.ID == houseID).First();
-            if (house == null)
+            if (house == null || house.Owner != player.ID)
                 return;
 
             house.Locked = !house.Locked;
