@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "S4DorAOlM7/uYv/mDkQYpJZ8JDrAbXTp5rNQXxlaD6SXtitrYVtpIfTS3ui3VYhZO6USD3OEwW/7MuwxnTxGFQ==",
+  "dgSpecHash": "+RMpv6OWsV5vIH29WZ/W0pn8tD4FQScnHIwUzoj4FbPWd0qpfzbLsQvLvRxdNH+S5YIXda6BerJte4nC/bDb3g==",
   "success": true,
-  "projectFilePath": "D:\\Projekte\\NAMERP\\Script\\NAMERP\\NAMERP.csproj",
+  "projectFilePath": "D:\\Projekte\\NAMERP-SOURCE\\Script\\NAMERP\\NAMERP.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\enten\\.nuget\\packages\\altv.net\\12.0.1\\altv.net.12.0.1.nupkg.sha512",
     "C:\\Users\\enten\\.nuget\\packages\\altv.net.capi\\12.0.1\\altv.net.capi.12.0.1.nupkg.sha512",

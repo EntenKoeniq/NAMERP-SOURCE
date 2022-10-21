@@ -177,8 +177,7 @@ namespace NAMERP
                 Vehicle.API.LoadPlayerVehicles(player.ID);
                 player.Position = new(0, 0, 0);
 
-                string houses = JsonConvert.SerializeObject(House.API.GetHouseList());
-                player.Emit("house:loadAll", houses);
+                House.API.LoadAllHouses(player);
             }
         }
     }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projekte\\NAMERP\\Script\\NAMERP\\NAMERP.csproj": {}
+    "D:\\Projekte\\NAMERP-SOURCE\\Script\\NAMERP\\NAMERP.csproj": {}
   },
   "projects": {
-    "D:\\Projekte\\NAMERP\\Script\\NAMERP\\NAMERP.csproj": {
+    "D:\\Projekte\\NAMERP-SOURCE\\Script\\NAMERP\\NAMERP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projekte\\NAMERP\\Script\\NAMERP\\NAMERP.csproj",
+        "projectUniqueName": "D:\\Projekte\\NAMERP-SOURCE\\Script\\NAMERP\\NAMERP.csproj",
         "projectName": "NAMERP",
-        "projectPath": "D:\\Projekte\\NAMERP\\Script\\NAMERP\\NAMERP.csproj",
+        "projectPath": "D:\\Projekte\\NAMERP-SOURCE\\Script\\NAMERP\\NAMERP.csproj",
         "packagesPath": "C:\\Users\\enten\\.nuget\\packages\\",
-        "outputPath": "D:\\Projekte\\NAMERP\\Script\\NAMERP\\obj\\",
+        "outputPath": "D:\\Projekte\\NAMERP-SOURCE\\Script\\NAMERP\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\enten\\AppData\\Roaming\\NuGet\\NuGet.Config",

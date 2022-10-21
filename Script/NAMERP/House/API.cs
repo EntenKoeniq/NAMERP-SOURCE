@@ -28,8 +28,24 @@ namespace NAMERP.House
             new Position(1397.072f, 1142.011f, 114.3335f)       // Farm Ultra Luxus - 12
         };
 
-        public static List<House> GetHouseList() => _houseList;
+        /// <summary>
+        /// Load all houses for a specific player
+        /// </summary>
+        /// <param name="player">The player receiving the blips</param>
+        public static void LoadAllHouses(IPlayer player)
+        {
+            _houseList.ForEach((el) =>
+            {
+                IBlip blip = Alt.CreateBlip(player, (byte)BlipType.Destination, el.Location);
+                blip.Sprite = 411; // House
+                blip.Color = (byte)(el.Owner == 0 ? 1 : 2); // House for sell?
+                blip.Name = "Haus";
+            });
+        }
 
+        /// <summary>
+        /// Load all houses from the database
+        /// </summary>
         public static void LoadAllHouses()
         {
             NpgsqlConnection conn = Database.GetInstance().GetConnection();
@@ -51,6 +67,12 @@ namespace NAMERP.House
             Database.GetInstance().FreeConnection(conn);
         }
 
+        /// <summary>
+        /// Create a new house (NOT DONE YET!)
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="price"></param>
+        /// <param name="interior"></param>
         public static void CreateHouse(Position pos, int price, short interior)
         {
             NpgsqlCommand cmd = new("INSERT INTO houses (p_x, p_y, p_z, price, interior) VALUES (@p_x, @p_y, @p_z, @price, @interior)");
@@ -61,10 +83,7 @@ namespace NAMERP.House
             cmd.Parameters.AddWithValue("@interior", interior);
             Database.ExecuteNonQuery(cmd);
 
-            Alt.ForEachPlayers(new FunctionCallback<IPlayer>((player) => {
-                string house = JsonConvert.SerializeObject(new House() { ID = -1, Interior = interior, Location = pos, Locked = true, Owner = 0, Price = price });
-                player.Emit("house:loadSingle", house);
-            }));
+            Alt.LogInfo($"Es wurde ein neues Haus hinzugefügt auf folgender Position: [{pos.X}, {pos.Y}, {pos.Z}]");
         }
 
         public static void DeleteHouse()
