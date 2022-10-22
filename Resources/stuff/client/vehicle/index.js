@@ -6,6 +6,14 @@ var isDriver = false;
 var view = null;
 var altTick = null;
 
+// Vehicle stuff
+var vInterval = null;
+var vId = 0;
+var vFuel = 0;
+var vFuel_tank = 0;
+var vFuel_consumption = 0;
+var vMulti = 0;
+
 alt.onServer("vehicle:enter", (driver) => {
   isInVehicle = true;
   isDriver = driver;
@@ -18,6 +26,24 @@ alt.onServer("vehicle:enter", (driver) => {
 
   if (!driver)
     return;
+  
+  const localVeh = local.vehicle;
+  vId = localVeh.getSyncedMeta("id");
+  vFuel = localVeh.getSyncedMeta("fuel");
+  vFuel_tank = localVeh.getSyncedMeta("fuel_tank");
+  vFuel_consumption = localVeh.getSyncedMeta("fuel_consumption");
+  vMulti = localVeh.getSyncedMeta("multi");
+
+  vInterval = alt.setInterval(() => {
+    const trip = localVeh.speed / 1000;
+    if (vFuel === 0) {
+      alt.emitServer("vehicle:update", vId, 0);
+      return;
+    }
+    vFuel -= vFuel_consumption * trip;
+    if (vFuel < 0)
+      vFuel = 0;
+  }, 1000);
 
   view = new alt.WebView("http://resource/client/vehicle/html/index.html");
   view.focus();
@@ -25,16 +51,23 @@ alt.onServer("vehicle:enter", (driver) => {
   altTick = alt.everyTick(() => {
     const veh = alt.Player.local.vehicle;
     if (veh && view)
-      view.emit("update", veh.speed, veh.lockState === 2, veh.engineOn, veh.daylightOn);
+      view.emit("update", veh.speed, (vFuel / vFuel_tank * 100).toFixed(2), veh.lockState === 2);
   });
 });
 
 alt.onServer("vehicle:leave", () => {
   isInVehicle = false;
   if (isDriver) {
+    alt.emitServer("vehicle:update", vId, vFuel);
+
     if (altTick !== null) {
       alt.clearEveryTick(altTick);
       altTick = null;
+    }
+
+    if (vInterval !== null) {
+      alt.clearInterval(vInterval);
+      vInterval = null;
     }
 
     isDriver = false;

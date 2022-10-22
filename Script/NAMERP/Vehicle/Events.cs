@@ -27,6 +27,14 @@ namespace NAMERP.Vehicle
             player.Emit("vehicle:leave");
         }
 
+        [ClientEvent("vehicle:update")]
+        public static void CE_VEHICLE_UPDATE(CPlayer _, int id, float fuel)
+        {
+            CVehicle? veh = Alt.GetAllVehicles().Cast<CVehicle>().Where((el) => el.ID == id).FirstOrDefault();
+            if (veh != null)
+                veh.SetSyncedMetaData("fuel", fuel);
+        }
+
         [ClientEvent("vehicle:toggleEngine")]
         public static void CE_VEHICLE_TOGGLE_ENGINE(CPlayer player)
         {

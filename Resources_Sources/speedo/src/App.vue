@@ -7,12 +7,10 @@
       <div>
         <i class="fa-solid fa-gas-pump"></i>
       </div>
-      <div style="text-align:right"><span id="speed">78</span>%</div>
+      <div style="text-align:right"><span>{{ fuelEl }}</span>%</div>
     </section>
     <section style="display:flex;justify-content:center">
       <i class="fa-solid fa-key" :style="[ lockEl ? 'color:yellow' : none ]"></i>
-      <i class="fa-solid fa-bolt" :style="[ engineEl ? 'color:yellow' : none ]"></i>
-      <i class="fa-solid fa-lightbulb" :style="[ lightEl ? 'color:yellow' : none ]"></i>
     </section>
   </main>
 </template>
@@ -29,19 +27,16 @@ export default {
   data: () => ({
     speedEl: 0,
     fuelEl: 0,
-    lockEl: false,
-    engineEl: false,
-    lightEl: false
+    lockEl: false
   }),
   mounted() {
-    alt.on("update", (speed, lock, engine, light) => this.update(speed, lock, engine, light));
+    alt.on("update", (speed, fuel, lock) => this.update(speed, fuel, lock));
   },
   methods: {
-    update(speed, lock, engine, light) {
+    update(speed, fuel, lock) {
       this.speedEl = Math.round(speed * 3.6);
+      this.fuelEl = fuel;
       this.lockEl = lock;
-      this.engineEl = engine,
-      this.lightEl = light;
     }
   }
 }

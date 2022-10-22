@@ -29,7 +29,12 @@ namespace NAMERP.Vehicle
                     veh.ManualEngineControl = true;
                     veh.EngineOn = rdr.GetBoolean(5);
                     veh.LockState = rdr.GetBoolean(7) ? VehicleLockState.Locked : VehicleLockState.Unlocked;
-                    veh.NumberplateText = "ALT:RP";
+                    veh.NumberplateText = "EntenKoeniq";
+                    veh.SetSyncedMetaData("id", rdr.GetInt32(0));
+                    veh.SetSyncedMetaData("fuel", rdr.GetFloat(17));
+                    veh.SetSyncedMetaData("fuel_tank", rdr.GetFloat(20));
+                    veh.SetSyncedMetaData("fuel_consumption", rdr.GetFloat(21));
+                    veh.SetSyncedMetaData("multi", rdr.GetInt32(19));
                 }
             }
             rdr.Close();
@@ -40,7 +45,9 @@ namespace NAMERP.Vehicle
         {
             foreach (CVehicle veh in Alt.GetAllVehicles().Cast<CVehicle>().Where(res => res.Owner == id))
             {
-                NpgsqlCommand cmd = new("UPDATE vehicles SET engine = @engine, alive = @alive, locked = @locked, p_x = @p_x, p_y = @p_y, p_z = @p_z, r_r = @r_r, r_p = @r_p, r_y = @r_y, dim = @dim WHERE id = @id");
+                veh.GetSyncedMetaData("fuel", out float vehFuel);
+
+                NpgsqlCommand cmd = new("UPDATE vehicles SET engine = @engine, alive = @alive, locked = @locked, p_x = @p_x, p_y = @p_y, p_z = @p_z, r_r = @r_r, r_p = @r_p, r_y = @r_y, dim = @dim, fuel = @fuel WHERE id = @id");
                 cmd.Parameters.AddWithValue("@engine", veh.EngineOn);
                 cmd.Parameters.AddWithValue("@alive", !veh.IsDestroyed);
                 cmd.Parameters.AddWithValue("@locked", veh.LockState == VehicleLockState.Locked);
@@ -51,6 +58,7 @@ namespace NAMERP.Vehicle
                 cmd.Parameters.AddWithValue("@r_p", veh.Rotation.Pitch);
                 cmd.Parameters.AddWithValue("@r_y", veh.Rotation.Yaw);
                 cmd.Parameters.AddWithValue("@dim", veh.Dimension);
+                cmd.Parameters.AddWithValue("@fuel", vehFuel);
                 Database.ExecuteNonQuery(cmd);
 
                 veh.Remove();
