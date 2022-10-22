@@ -1,5 +1,4 @@
 ﻿using AltV.Net;
-using AltV.Net.Elements.Entities;
 using AltV.Net.Enums;
 
 using Npgsql;
