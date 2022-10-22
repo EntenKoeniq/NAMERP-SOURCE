@@ -20,8 +20,8 @@ namespace NAMERP.House
         [ClientEvent("house:buy")]
         public static void CE_BUY_HOUSE(CPlayer player, int id) => API.BuyHouse(player, id);
 
-        //[ClientEvent("house:sell")]
-        //public static void CE_SELL_HOUSE() => API.SellHouse();
+        [ClientEvent("house:sell")]
+        public static void CE_SELL_HOUSE(CPlayer player, int id) => API.SellHouse(player, id);
 
         [ClientEvent("house:enter")]
         public static void CE_ENTER_HOUSE(IPlayer player, int id) => API.EnterHouse(player, id);

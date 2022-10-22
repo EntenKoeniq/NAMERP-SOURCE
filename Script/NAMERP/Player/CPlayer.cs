@@ -11,7 +11,7 @@ namespace NAMERP
 
         public int ID { get; set; } = 0;
         public string Email { get; set; } = string.Empty;
-        public int Money { get; set; } = 0;
+        public int Money { get; set; } = 75000;
         public bool HasMoney(int value) => Money >= value;
         public bool SetMoney(int value, bool add, bool update = true)
         {

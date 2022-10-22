@@ -157,16 +157,16 @@ namespace NAMERP.House
             if (house.Owner != 0)
                 return;
 
-            if (!player.SetMoney(house.Price, false))
+            if (!player.SetMoney(house.Price, false, false))
             {
                 player.SendChatMessage("{FF0000}Du hast nicht ausreichend Geld auf der Hand!");
                 return;
             }
 
-            if (!SetOwner(player.ID, house.ID))
+            if (!SetOwner(player.ID, ref house))
             {
                 // Give the player their money back
-                player.SetMoney(house.Price, true);
+                player.SetMoney(house.Price, true, false);
                 player.SendChatMessage("{FF0000}Bitte melde dich im Support! Etwas ist beim Kauf schief gelaufen!");
             }
         }
@@ -175,26 +175,33 @@ namespace NAMERP.House
         /// NOT IMPLEMENTED YET!
         /// </summary>
         /// <exception cref="NotImplementedException"></exception>
-        public static void SellHouse()
+        public static void SellHouse(CPlayer player, int houseID)
         {
-            throw new NotImplementedException();
+            House? house = _houseList.Where((el) => el.ID == houseID).FirstOrDefault();
+            if (house == null)
+                return;
+
+            // This player doesn't own this house
+            if (house.Owner != player.ID)
+                return;
+
+            if (!player.SetMoney(house.Price / 3, true, false))
+                player.SendChatMessage("{FF0000}Bitte melde dich im Support! Etwas ist beim Verkauf schief gelaufen!");
+
+            SetOwner(0, ref house);
         }
 
         /// <summary>
         /// Set a new house owner
         /// </summary>
         /// <param name="playerID"></param>
-        /// <param name="houseID"></param>
+        /// <param name="house"></param>
         /// <returns></returns>
-        public static bool SetOwner(int playerID, int houseID)
+        public static bool SetOwner(int playerID, ref House house)
         {
-            House? house = _houseList.Where((el) => el.ID == houseID).FirstOrDefault();
-            if (house == null)
-                return false;
-
             NpgsqlCommand cmd = new("UPDATE houses SET owner = @owner WHERE id = @id");
             cmd.Parameters.AddWithValue("@owner", playerID);
-            cmd.Parameters.AddWithValue("@id", houseID);
+            cmd.Parameters.AddWithValue("@id", house.ID);
             Database.ExecuteNonQuery(cmd);
 
             house.Owner = playerID;

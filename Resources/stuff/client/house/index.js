@@ -48,8 +48,6 @@ alt.onServer("house:get", (id, owner, price, locked) => {
   if (view !== null)
     return;
   
-  console.log(`${id} | ${owner} | ${price} | ${locked}`);
-  
   alt.toggleVoiceControls(false);
   alt.toggleGameControls(false);
   alt.showCursor(true);
@@ -57,6 +55,18 @@ alt.onServer("house:get", (id, owner, price, locked) => {
   view = new alt.WebView("http://resource/client/house/html/index.html");
   view.on("enter", (id) => {
     alt.emitServer("house:enter", id);
+    deleteView();
+  });
+  view.on("buy", (id) => {
+    alt.emitServer("house:buy", id);
+    deleteView();
+  });
+  view.on("sell", (id) => {
+    alt.emitServer("house:sell", id);
+    deleteView();
+  });
+  view.on("lock", (id) => {
+    alt.emitServer("house:lock", id);
     deleteView();
   });
   view.focus();

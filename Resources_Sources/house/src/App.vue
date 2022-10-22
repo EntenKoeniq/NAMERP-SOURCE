@@ -16,8 +16,8 @@
         <p>$ {{ price }}</p>
       </div>
       <div style="margin-top: 1vw">
-        <button :class="[ owner === 0 ? 'green' : 'red' ]">{{ owner === 0 ? 'Kaufen' : 'Verkaufen' }}</button>
-        <button :class="[ locked ? 'green' : 'red' ]">{{ locked ? 'Öffnen' : 'Schließen' }}</button>
+        <button :class="[ owner === 0 ? 'green' : 'red' ]" @click="owner === 0 ? buy() : sell()">{{ owner === 0 ? 'Kaufen' : 'Verkaufen' }}</button>
+        <button :class="[ locked ? 'green' : 'red' ]" @click="lock()">{{ locked ? 'Öffnen' : 'Schließen' }}</button>
         <button @click="enter()">Betreten</button>
         <button>Garage</button>
       </div>
@@ -51,6 +51,15 @@ export default {
   methods: {
     enter() {
       alt.emit("enter", this.id);
+    },
+    buy() {
+      alt.emit("buy", this.id);
+    },
+    sell() {
+      alt.emit("sell", this.id);
+    },
+    lock() {
+      alt.emit("lock", this.id);
     }
   }
 }
