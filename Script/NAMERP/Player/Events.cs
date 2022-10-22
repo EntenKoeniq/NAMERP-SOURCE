@@ -68,8 +68,9 @@ namespace NAMERP.Player
                 player.SetSyncedMetaData("NAME", "Fremder");
                 player.SetSyncedMetaData("ID", player.ID);
 
-                Vehicle.API.LoadPlayerVehicles(player.ID);
                 player.Position = new(0, 0, 0);
+
+                Vehicle.API.LoadPlayerVehicles(player.ID);
             }
         }
     }

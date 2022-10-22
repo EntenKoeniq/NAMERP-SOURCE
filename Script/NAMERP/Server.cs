@@ -10,6 +10,13 @@ namespace NAMERP
     {
         public static uint LastWeather = (uint)WeatherType.Clear;
         public static DateTime LastWeatherUpdate = DateTime.Now;
+        private static readonly WeatherType[] _weatherTypes = {
+                            WeatherType.Clear,
+                            WeatherType.Clouds,
+                            WeatherType.Rain,
+                            WeatherType.Thunder,
+                            WeatherType.ExtraSunny
+                        };
 
         public override void OnStart()
         {
@@ -35,15 +42,9 @@ namespace NAMERP
                     // Update every 20 minutes
                     if ((currentTime - LastWeatherUpdate).TotalMinutes > 20)
                     {
-                        WeatherType[] weatherTypes = {
-                            WeatherType.Clear,
-                            WeatherType.Clouds,
-                            WeatherType.Rain,
-                            WeatherType.Thunder,
-                            WeatherType.ExtraSunny
-                        };
+                        
                         Random rand = new();
-                        uint randWeather = (uint)rand.Next(weatherTypes.Length);
+                        uint randWeather = (uint)rand.Next(_weatherTypes.Length);
                         LastWeather = randWeather;
 
                         Alt.GetAllPlayers().All(player =>

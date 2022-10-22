@@ -61,15 +61,15 @@ namespace NAMERP.Vehicle
             else
                 veh = Alt.GetAllVehicles()
                          .Cast<CVehicle>()
-                         .Where(res => res.HasKey(player) && player.Position.Distance(res.Position) < 5f)
-                         .OrderBy(res => player.Position.Distance(res.Position))
+                         .Where((el) => el.HasKey(player) && player.Position.Distance(el.Position) < 5f)
+                         .OrderBy((el) => player.Position.Distance(el.Position))
                          .FirstOrDefault();
 
             if (veh != null)
             {
                 veh.LockState = veh.LockState == VehicleLockState.Locked ? VehicleLockState.Unlocked : VehicleLockState.Locked;
                 IPlayer[] targets = Alt.GetAllPlayers()
-                                       .Where(target => Vector3.Distance(target.Position, veh.Position) < 50)
+                                       .Where((el) => Vector3.Distance(el.Position, veh.Position) < 50)
                                        .ToArray();
                 Alt.EmitClients(targets, "vehicle:indicatorLights", veh.Id, 8, 750);
             }

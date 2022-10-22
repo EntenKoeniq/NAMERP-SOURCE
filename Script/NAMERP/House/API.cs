@@ -127,6 +127,7 @@ namespace NAMERP.House
         /// <summary>
         /// Lock a house by its ID
         /// </summary>
+        /// <param name="player"></param>
         /// <param name="houseID"></param>
         public static void LockHouse(CPlayer player, int houseID)
         {
@@ -172,9 +173,10 @@ namespace NAMERP.House
         }
 
         /// <summary>
-        /// NOT IMPLEMENTED YET!
+        /// Sell a house by its ID
         /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
+        /// <param name="player">The owner of this house</param>
+        /// <param name="houseID">The house id</param>
         public static void SellHouse(CPlayer player, int houseID)
         {
             House? house = _houseList.Where((el) => el.ID == houseID).FirstOrDefault();
