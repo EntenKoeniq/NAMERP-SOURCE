@@ -27,10 +27,8 @@ namespace NAMERP
             if (!player.LoggedIn)
                 return;
 
-            Vehicle.API.SavePlayerVehicles(player.ID);
+            Vehicle.API.SavePlayerVehicles(player.ID, true);
 
-            if (!Account.Helper.AccountAlreadyOnline(player.Email))
-                return;
             NpgsqlCommand cmd = new("DELETE FROM online WHERE account_id = @id");
             cmd.Parameters.AddWithValue("@id", player.ID);
             Database.ExecuteNonQuery(cmd);

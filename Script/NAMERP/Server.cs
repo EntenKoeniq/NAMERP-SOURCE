@@ -67,10 +67,7 @@ namespace NAMERP
         {
             Alt.LogWarning("Server wird gestoppt!");
             Alt.LogWarning("Spieler Fahrzeuge werden gespeichert...");
-            foreach (CPlayer player in Alt.GetAllPlayers().Cast<CPlayer>())
-            {
-                Vehicle.API.SavePlayerVehicles(player.ID);
-            }
+            Vehicle.API.SaveAllVehicles();
         }
 
         public override IEntityFactory<IPlayer> GetPlayerFactory()

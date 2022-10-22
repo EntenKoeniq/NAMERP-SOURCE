@@ -28,11 +28,14 @@ namespace NAMERP.Vehicle
         }
 
         [ClientEvent("vehicle:update")]
-        public static void CE_VEHICLE_UPDATE(CPlayer _, int id, float fuel)
+        public static void CE_VEHICLE_UPDATE(IPlayer _, int id, float fuel)
         {
             CVehicle? veh = Alt.GetAllVehicles().Cast<CVehicle>().Where((el) => el.ID == id).FirstOrDefault();
-            if (veh != null)
-                veh.SetSyncedMetaData("fuel", fuel);
+            if (veh == null)
+                return;
+            veh.SetSyncedMetaData("fuel", fuel);
+            if (fuel == 0)
+                veh.EngineOn = false;
         }
 
         [ClientEvent("vehicle:toggleEngine")]
@@ -49,7 +52,8 @@ namespace NAMERP.Vehicle
                 return;
             }
 
-            veh.EngineOn = !veh.EngineOn;
+            veh.GetSyncedMetaData("fuel", out float vehFuel);
+            veh.EngineOn = vehFuel != 0 ? !veh.EngineOn : false;
         }
 
         [ClientEvent("vehicle:lock")]

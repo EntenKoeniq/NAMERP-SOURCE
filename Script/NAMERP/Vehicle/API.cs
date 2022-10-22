@@ -1,4 +1,5 @@
 ﻿using AltV.Net;
+using AltV.Net.Elements.Entities;
 using AltV.Net.Enums;
 
 using Npgsql;
@@ -41,28 +42,41 @@ namespace NAMERP.Vehicle
             Database.GetInstance().FreeConnection(conn);
         }
 
-        public static void SavePlayerVehicles(int id)
+        private static void SaveVehicle(ref CVehicle veh)
         {
-            foreach (CVehicle veh in Alt.GetAllVehicles().Cast<CVehicle>().Where(res => res.Owner == id))
+            veh.GetSyncedMetaData("fuel", out float vehFuel);
+
+            NpgsqlCommand cmd = new("UPDATE vehicles SET engine = @engine, alive = @alive, locked = @locked, p_x = @p_x, p_y = @p_y, p_z = @p_z, r_r = @r_r, r_p = @r_p, r_y = @r_y, dim = @dim, fuel = @fuel WHERE id = @id");
+            cmd.Parameters.AddWithValue("@engine", veh.EngineOn);
+            cmd.Parameters.AddWithValue("@alive", !veh.IsDestroyed);
+            cmd.Parameters.AddWithValue("@locked", veh.LockState == VehicleLockState.Locked);
+            cmd.Parameters.AddWithValue("@p_x", veh.Position.X);
+            cmd.Parameters.AddWithValue("@p_y", veh.Position.Y);
+            cmd.Parameters.AddWithValue("@p_z", veh.Position.Z);
+            cmd.Parameters.AddWithValue("@r_r", veh.Rotation.Roll);
+            cmd.Parameters.AddWithValue("@r_p", veh.Rotation.Pitch);
+            cmd.Parameters.AddWithValue("@r_y", veh.Rotation.Yaw);
+            cmd.Parameters.AddWithValue("@dim", veh.Dimension);
+            cmd.Parameters.AddWithValue("@fuel", vehFuel);
+            Database.ExecuteNonQuery(cmd);
+        }
+
+        public static void SavePlayerVehicles(int id, bool delete = false)
+        {
+            CVehicle[] vehs = Alt.GetAllVehicles().Cast<CVehicle>().Where(res => res.Owner == id).ToArray();
+            for (int i = 0; i < vehs.Length; i++)
             {
-                veh.GetSyncedMetaData("fuel", out float vehFuel);
-
-                NpgsqlCommand cmd = new("UPDATE vehicles SET engine = @engine, alive = @alive, locked = @locked, p_x = @p_x, p_y = @p_y, p_z = @p_z, r_r = @r_r, r_p = @r_p, r_y = @r_y, dim = @dim, fuel = @fuel WHERE id = @id");
-                cmd.Parameters.AddWithValue("@engine", veh.EngineOn);
-                cmd.Parameters.AddWithValue("@alive", !veh.IsDestroyed);
-                cmd.Parameters.AddWithValue("@locked", veh.LockState == VehicleLockState.Locked);
-                cmd.Parameters.AddWithValue("@p_x", veh.Position.X);
-                cmd.Parameters.AddWithValue("@p_y", veh.Position.Y);
-                cmd.Parameters.AddWithValue("@p_z", veh.Position.Z);
-                cmd.Parameters.AddWithValue("@r_r", veh.Rotation.Roll);
-                cmd.Parameters.AddWithValue("@r_p", veh.Rotation.Pitch);
-                cmd.Parameters.AddWithValue("@r_y", veh.Rotation.Yaw);
-                cmd.Parameters.AddWithValue("@dim", veh.Dimension);
-                cmd.Parameters.AddWithValue("@fuel", vehFuel);
-                Database.ExecuteNonQuery(cmd);
-
-                veh.Remove();
+                SaveVehicle(ref vehs[i]);
+                if (delete)
+                    vehs[i].Remove();
             }
+        }
+
+        public static void SaveAllVehicles()
+        {
+            CVehicle[] vehs = Alt.GetAllVehicles().Cast<CVehicle>().ToArray();
+            for (int i = 0; i < vehs.Length; i++)
+                SaveVehicle(ref vehs[0]);
         }
     }
 }
