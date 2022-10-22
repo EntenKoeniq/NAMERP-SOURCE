@@ -27,7 +27,7 @@ namespace NAMERP.House
             new Position(1397.072f, 1142.011f, 114.3335f)       // Farm Ultra Luxus - 12
         };
 
-        public static IBlip CreateBlip(Position position, int owner)
+        private static IBlip CreateBlip(Position position, int owner)
         {
             IBlip blip = Alt.CreateBlip((byte)BlipType.Destination, position);
             blip.Sprite = 411; // House
@@ -87,12 +87,12 @@ namespace NAMERP.House
 
         public static (int, int, int, bool) GetHouseInfoByPosition(Position position)
         {
-            House? house = _houseList.OrderBy((el) => position.Distance(el.Location) <= 2f).FirstOrDefault();
+            House? house = _houseList.Where((el) => position.Distance(el.Location) <= 2f).OrderBy((el) => position.Distance(el.Location)).FirstOrDefault();
             return house == null ? (0, 0, 0, false) : (house.ID, house.Owner, house.Price, house.Locked);
         }
 
         /// <summary>
-        /// NOT IMPLEMENTED YET!
+        /// Let the player enter a house by its ID
         /// </summary>
         /// <param name="player"></param>
         /// <param name="houseID"></param>
@@ -107,7 +107,7 @@ namespace NAMERP.House
         }
 
         /// <summary>
-        /// NOT IMPLEMENTED YET!
+        /// Let the player get out of a house
         /// </summary>
         /// <param name="player"></param>
         public static void LeaveHouse(IPlayer player)
@@ -125,12 +125,12 @@ namespace NAMERP.House
         }
 
         /// <summary>
-        /// NOT IMPLEMENTED YET!
+        /// Lock a house by its ID
         /// </summary>
         /// <param name="houseID"></param>
         public static void LockHouse(CPlayer player, int houseID)
         {
-            House? house = _houseList.Where((el) => el.ID == houseID).First();
+            House? house = _houseList.Where((el) => el.ID == houseID).FirstOrDefault();
             if (house == null || house.Owner != player.ID)
                 return;
 
@@ -143,13 +143,13 @@ namespace NAMERP.House
         }
 
         /// <summary>
-        /// NOT IMPLEMENTED YET!
+        /// Buy a house by its ID
         /// </summary>
         /// <param name="player"></param>
         /// <param name="houseID"></param>
         public static void BuyHouse(CPlayer player, int houseID)
         {
-            House? house = _houseList.Where((el) => el.ID == houseID).First();
+            House? house = _houseList.Where((el) => el.ID == houseID).FirstOrDefault();
             if (house == null)
                 return;
 
@@ -171,20 +171,24 @@ namespace NAMERP.House
             }
         }
 
+        /// <summary>
+        /// NOT IMPLEMENTED YET!
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
         public static void SellHouse()
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// NOT IMPLEMENTED YET!
+        /// Set a new house owner
         /// </summary>
         /// <param name="playerID"></param>
         /// <param name="houseID"></param>
         /// <returns></returns>
         public static bool SetOwner(int playerID, int houseID)
         {
-            House? house = _houseList.Where((el) => el.ID == houseID).First();
+            House? house = _houseList.Where((el) => el.ID == houseID).FirstOrDefault();
             if (house == null)
                 return false;
 
