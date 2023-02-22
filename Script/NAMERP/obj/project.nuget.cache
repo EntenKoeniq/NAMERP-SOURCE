@@ -1,16 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "Y98guwdB+J91sOUApxhwDtxT0LKZTSdtQfjdX8Oo7EDO/WdYg3FpzLaStxOIvPpzGJ2QqFwb2/7e/qnqRYB4Ig==",
+  "dgSpecHash": "R4g1DQikNwPMD/2HA3SyUT78h5RHOti75n2vLrhk/sVu3g8aGQVXwS+4zHJ2EbDVtjl6tAFBlkIbvDbKzJXZIQ==",
   "success": true,
   "projectFilePath": "D:\\Projekte\\NAMERP-SOURCE\\Script\\NAMERP\\NAMERP.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\enten\\.nuget\\packages\\altv.net\\12.0.1\\altv.net.12.0.1.nupkg.sha512",
-    "C:\\Users\\enten\\.nuget\\packages\\altv.net.capi\\12.0.1\\altv.net.capi.12.0.1.nupkg.sha512",
-    "C:\\Users\\enten\\.nuget\\packages\\altv.net.resources.chat.api\\12.0.1\\altv.net.resources.chat.api.12.0.1.nupkg.sha512",
-    "C:\\Users\\enten\\.nuget\\packages\\altv.net.shared\\12.0.1\\altv.net.shared.12.0.1.nupkg.sha512",
-    "C:\\Users\\enten\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
-    "C:\\Users\\enten\\.nuget\\packages\\npgsql\\6.0.7\\npgsql.6.0.7.nupkg.sha512",
-    "C:\\Users\\enten\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    "C:\\Users\\xente\\.nuget\\packages\\altv.net\\13.0.18\\altv.net.13.0.18.nupkg.sha512",
+    "C:\\Users\\xente\\.nuget\\packages\\altv.net.capi\\13.0.18\\altv.net.capi.13.0.18.nupkg.sha512",
+    "C:\\Users\\xente\\.nuget\\packages\\altv.net.resources.chat.api\\13.0.18\\altv.net.resources.chat.api.13.0.18.nupkg.sha512",
+    "C:\\Users\\xente\\.nuget\\packages\\altv.net.shared\\13.0.18\\altv.net.shared.13.0.18.nupkg.sha512",
+    "C:\\Users\\xente\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
+    "C:\\Users\\xente\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\xente\\.nuget\\packages\\npgsql\\7.0.2\\npgsql.7.0.2.nupkg.sha512",
+    "C:\\Users\\xente\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

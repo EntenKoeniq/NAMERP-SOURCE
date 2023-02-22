@@ -56,3 +56,4 @@ D:\Projekte\NAMERP-SOURCE\Script\NAMERP\obj\Debug\net6.0\NAMERP.dll
 D:\Projekte\NAMERP-SOURCE\Script\NAMERP\obj\Debug\net6.0\refint\NAMERP.dll
 D:\Projekte\NAMERP-SOURCE\Script\NAMERP\obj\Debug\net6.0\NAMERP.pdb
 D:\Projekte\NAMERP-SOURCE\Script\NAMERP\obj\Debug\net6.0\ref\NAMERP.dll
+D:\Projekte\NAMERP-SOURCE\Script\NAMERP\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll

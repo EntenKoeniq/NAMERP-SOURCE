@@ -39,8 +39,8 @@ namespace NAMERP
                 {
                     DateTime currentTime = DateTime.Now;
                     
-                    // Update every 20 minutes
-                    if ((currentTime - LastWeatherUpdate).TotalMinutes > 20)
+                    // Update every 5 minutes
+                    if ((currentTime - LastWeatherUpdate).TotalMinutes > 5)
                     {
                         
                         Random rand = new();

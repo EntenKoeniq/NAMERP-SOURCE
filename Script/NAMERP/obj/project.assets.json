@@ -2,10 +2,10 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "AltV.Net/12.0.1": {
+      "AltV.Net/13.0.18": {
         "type": "package",
         "dependencies": {
-          "AltV.Net.Shared": "12.0.1"
+          "AltV.Net.Shared": "13.0.18"
         },
         "compile": {
           "lib/net6.0/AltV.Net.dll": {}
@@ -14,7 +14,7 @@
           "lib/net6.0/AltV.Net.dll": {}
         }
       },
-      "AltV.Net.CApi/12.0.1": {
+      "AltV.Net.CApi/13.0.18": {
         "type": "package",
         "compile": {
           "lib/net6.0/AltV.Net.CApi.dll": {}
@@ -23,10 +23,10 @@
           "lib/net6.0/AltV.Net.CApi.dll": {}
         }
       },
-      "AltV.Net.Resources.Chat.Api/12.0.1": {
+      "AltV.Net.Resources.Chat.Api/13.0.18": {
         "type": "package",
         "dependencies": {
-          "AltV.Net": "12.0.1"
+          "AltV.Net": "13.0.18"
         },
         "compile": {
           "lib/net6.0/AltV.Net.Resources.Chat.Api.dll": {}
@@ -35,10 +35,10 @@
           "lib/net6.0/AltV.Net.Resources.Chat.Api.dll": {}
         }
       },
-      "AltV.Net.Shared/12.0.1": {
+      "AltV.Net.Shared/13.0.18": {
         "type": "package",
         "dependencies": {
-          "AltV.Net.CApi": "12.0.1"
+          "AltV.Net.CApi": "13.0.18"
         },
         "compile": {
           "lib/net6.0/AltV.Net.Shared.dll": {}
@@ -60,9 +60,26 @@
           }
         }
       },
-      "Npgsql/6.0.7": {
+      "Microsoft.Extensions.Logging.Abstractions/6.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
+        }
+      },
+      "Npgsql/7.0.2": {
         "type": "package",
         "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "compile": {
@@ -95,56 +112,56 @@
     }
   },
   "libraries": {
-    "AltV.Net/12.0.1": {
-      "sha512": "zXTYoWkMOUaYiwBdqMsATzxMKhFTTDC1II8TPFjbeXhcutjSNyoOl/WVapGesIFrFWDHdtKSQMneIsbd26qHCA==",
+    "AltV.Net/13.0.18": {
+      "sha512": "sekCSD3bProT5JW/Y6qvEvN/vTWSpy5KFtmIKnOAeVjjtHzcTeawzEB76j5dxrQDGjF7zxNVnZCzpc+2PvNx7w==",
       "type": "package",
-      "path": "altv.net/12.0.1",
+      "path": "altv.net/13.0.18",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "altv.net.12.0.1.nupkg.sha512",
+        "altv.net.13.0.18.nupkg.sha512",
         "altv.net.nuspec",
         "icon.png",
         "lib/net6.0/AltV.Net.dll",
         "license.txt"
       ]
     },
-    "AltV.Net.CApi/12.0.1": {
-      "sha512": "o4bV17AFgz3b9PW2wJMBIWzR0I+ttFlZe/97cVXOiZBRTW6WwjXojkSQ6dOloDKOtbYMGtRiQ108M+hjoKIuvw==",
+    "AltV.Net.CApi/13.0.18": {
+      "sha512": "ZVQ8JdueliPlmKE3+y5kgYrm/WoXc4rauScJwpsFG9HGcuR+EtE8yZX3wcsmcknV95ejm3hMiDjBQngRAsV0Bg==",
       "type": "package",
-      "path": "altv.net.capi/12.0.1",
+      "path": "altv.net.capi/13.0.18",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "altv.net.capi.12.0.1.nupkg.sha512",
+        "altv.net.capi.13.0.18.nupkg.sha512",
         "altv.net.capi.nuspec",
         "icon.png",
         "lib/net6.0/AltV.Net.CApi.dll",
         "license.txt"
       ]
     },
-    "AltV.Net.Resources.Chat.Api/12.0.1": {
-      "sha512": "1MK4GRn4ADoSoivLuPLBKrYiE5bCKuLL1yY52U9rpHGhpUsmlxNQxrjayKOS8hTeN3ihlIsWo2I5G3fhaGi9vg==",
+    "AltV.Net.Resources.Chat.Api/13.0.18": {
+      "sha512": "dNky2/GQsc1g2u1HfBmnuK0UzhITYrZsW7FATW4xzVdRFu45JlZSsWHC/JALfYFkkywWP/YFfJzLI9ttdTVvWQ==",
       "type": "package",
-      "path": "altv.net.resources.chat.api/12.0.1",
+      "path": "altv.net.resources.chat.api/13.0.18",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "altv.net.resources.chat.api.12.0.1.nupkg.sha512",
+        "altv.net.resources.chat.api.13.0.18.nupkg.sha512",
         "altv.net.resources.chat.api.nuspec",
         "icon.png",
         "lib/net6.0/AltV.Net.Resources.Chat.Api.dll",
         "license.txt"
       ]
     },
-    "AltV.Net.Shared/12.0.1": {
-      "sha512": "Zj44ivDuBvM8C0eRCM1m9rAHeyn2ckGLKLBEqMT18w/jpThGIuTk7r5iJF38nkcnkSXT3mtOSJuiXtUmSVYpsA==",
+    "AltV.Net.Shared/13.0.18": {
+      "sha512": "O3Udbb4sF2+/3MlTot7ODEDI9PDK+xj96I70ah+fK4tcTBKHqbW1RmaXyOaFNUe/g2tSDaXDwreuG+ODsEeCQw==",
       "type": "package",
-      "path": "altv.net.shared/12.0.1",
+      "path": "altv.net.shared/13.0.18",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "altv.net.shared.12.0.1.nupkg.sha512",
+        "altv.net.shared.13.0.18.nupkg.sha512",
         "altv.net.shared.nuspec",
         "icon.png",
         "lib/net6.0/AltV.Net.Shared.dll",
@@ -182,10 +199,62 @@
         "readme.md"
       ]
     },
-    "Npgsql/6.0.7": {
-      "sha512": "HhD5q/VUJY++tCzc0eCrhtsxmUdP7NxNhUMOdYW6sqpC6NRlFLvUDf5JyRj0gOGkXe3Tn49toaisgvLqlzQ2JQ==",
+    "Microsoft.Extensions.Logging.Abstractions/6.0.0": {
+      "sha512": "/HggWBbTwy8TgebGSX5DBZ24ndhzi93sHUBDvP1IxbZD7FDokYzdAr6+vbWGjw2XAfR2EJ1sfKUotpjHnFWPxA==",
       "type": "package",
-      "path": "npgsql/6.0.7",
+      "path": "microsoft.extensions.logging.abstractions/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "analyzers/dotnet/roslyn3.11/cs/Microsoft.Extensions.Logging.Generators.dll",
+        "analyzers/dotnet/roslyn3.11/cs/cs/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn3.11/cs/de/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn3.11/cs/es/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn3.11/cs/fr/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn3.11/cs/it/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn3.11/cs/ja/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn3.11/cs/ko/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn3.11/cs/pl/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn3.11/cs/pt-BR/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn3.11/cs/ru/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn3.11/cs/tr/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn3.11/cs/zh-Hans/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn3.11/cs/zh-Hant/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn4.0/cs/Microsoft.Extensions.Logging.Generators.dll",
+        "analyzers/dotnet/roslyn4.0/cs/cs/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn4.0/cs/de/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn4.0/cs/es/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn4.0/cs/fr/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn4.0/cs/it/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn4.0/cs/ja/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn4.0/cs/ko/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn4.0/cs/pl/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn4.0/cs/pt-BR/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn4.0/cs/ru/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn4.0/cs/tr/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn4.0/cs/zh-Hans/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "analyzers/dotnet/roslyn4.0/cs/zh-Hant/Microsoft.Extensions.Logging.Generators.resources.dll",
+        "build/Microsoft.Extensions.Logging.Abstractions.targets",
+        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.Logging.Abstractions.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/net461/Microsoft.Extensions.Logging.Abstractions.dll",
+        "lib/net461/Microsoft.Extensions.Logging.Abstractions.xml",
+        "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll",
+        "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.xml",
+        "microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+        "microsoft.extensions.logging.abstractions.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "Npgsql/7.0.2": {
+      "sha512": "/k12hfmg4PI0IU2UTLN6n0s/FKUfox8+RdWtzgADYZoyks7GH82WLyXm27eeqatsi/nmiK9lO3HyULlTD87szg==",
+      "type": "package",
+      "path": "npgsql/7.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -194,13 +263,15 @@
         "lib/net5.0/Npgsql.xml",
         "lib/net6.0/Npgsql.dll",
         "lib/net6.0/Npgsql.xml",
+        "lib/net7.0/Npgsql.dll",
+        "lib/net7.0/Npgsql.xml",
         "lib/netcoreapp3.1/Npgsql.dll",
         "lib/netcoreapp3.1/Npgsql.xml",
         "lib/netstandard2.0/Npgsql.dll",
         "lib/netstandard2.0/Npgsql.xml",
         "lib/netstandard2.1/Npgsql.dll",
         "lib/netstandard2.1/Npgsql.xml",
-        "npgsql.6.0.7.nupkg.sha512",
+        "npgsql.7.0.2.nupkg.sha512",
         "npgsql.nuspec",
         "postgresql.png"
       ]
@@ -233,14 +304,14 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "AltV.Net >= 12.0.1",
-      "AltV.Net.Resources.Chat.Api >= 12.0.1",
+      "AltV.Net >= 13.0.18",
+      "AltV.Net.Resources.Chat.Api >= 13.0.18",
       "BCrypt.Net-Next >= 4.0.3",
-      "Npgsql >= 6.0.7"
+      "Npgsql >= 7.0.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\enten\\.nuget\\packages\\": {}
+    "C:\\Users\\xente\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -248,11 +319,11 @@
       "projectUniqueName": "D:\\Projekte\\NAMERP-SOURCE\\Script\\NAMERP\\NAMERP.csproj",
       "projectName": "NAMERP",
       "projectPath": "D:\\Projekte\\NAMERP-SOURCE\\Script\\NAMERP\\NAMERP.csproj",
-      "packagesPath": "C:\\Users\\enten\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\xente\\.nuget\\packages\\",
       "outputPath": "D:\\Projekte\\NAMERP-SOURCE\\Script\\NAMERP\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\enten\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\xente\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -280,11 +351,11 @@
         "dependencies": {
           "AltV.Net": {
             "target": "Package",
-            "version": "[12.0.1, )"
+            "version": "[13.0.18, )"
           },
           "AltV.Net.Resources.Chat.Api": {
             "target": "Package",
-            "version": "[12.0.1, )"
+            "version": "[13.0.18, )"
           },
           "BCrypt.Net-Next": {
             "target": "Package",
@@ -292,7 +363,7 @@
           },
           "Npgsql": {
             "target": "Package",
-            "version": "[6.0.7, )"
+            "version": "[7.0.2, )"
           }
         },
         "imports": [
@@ -311,7 +382,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

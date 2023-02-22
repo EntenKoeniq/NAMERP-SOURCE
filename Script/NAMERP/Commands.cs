@@ -15,15 +15,6 @@ namespace NAMERP
             player.SendChatMessage($"{{FF0000}}Befehl \"{cmd}\" nicht gefunden!");
         }
 
-        [Command("createhouse")]
-        public static void CMD_CreateHouse(CPlayer player, int price, short interior)
-        {
-            if (!player.IsAdmin(1))
-                return;
-
-            House.API.CreateHouse(player.Position, price, interior);
-        }
-
         [Command("leave")]
         public static void CMD_LeaveHouse(IPlayer player)
         {
@@ -83,11 +74,5 @@ namespace NAMERP
         //
         //    player.SendChatMessage(player.SetAdmin(6) ? $"Du bist nun als Level 6 Admin angemeldet!" : "{FF0000}Etwas ist schief gelaufen!");
         //}
-
-        [Command("weapon")]
-        public static void CMD_Weapons(CPlayer player)
-        {
-            player.GiveWeapon(WeaponModel.CarbineRifleMkII, -1, true);
-        }
     }
 }

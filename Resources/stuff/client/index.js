@@ -57,7 +57,7 @@ alt.on("showHud", () => {
     // Street names
     const getStreetHash = native.getStreetNameAtCoord(localPos.x, localPos.y, localPos.z, 0, 0);
     const streetName = native.getStreetNameFromHashKey(getStreetHash[1]);
-    const zone = native.getLabelText(native.getNameOfZone(localPos.x, localPos.y, localPos.z));
+    const zone = native.getFilenameForAudioConversation(native.getNameOfZone(localPos.x, localPos.y, localPos.z));
     helper.drawText2d(`${streetName}\n${zone}`, 0.215, 0.925, 0.5, 4, 244, 210, 66, 255);
   });
 });

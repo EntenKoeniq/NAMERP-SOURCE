@@ -8,11 +8,11 @@ namespace NAMERP
 {
     internal class Database
     {
-        private static readonly string _host = "CHANGEME";
-        private static readonly int _port = 5432;
-        private static readonly string _database = "CHANGEME";
-        private static readonly string _username = "CHANGEME";
-        private static readonly string _password = "CHANGEME";
+        private static readonly string _host = "localhost";
+        private static readonly int _port = 32768;
+        private static readonly string _database = "postgres";
+        private static readonly string _username = "postgres";
+        private static readonly string _password = "postgrespw";
 
         private static readonly int _pool_size = 12;
         private static readonly int _reconnect_interval = 3;

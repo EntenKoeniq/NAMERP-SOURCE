@@ -10,11 +10,11 @@
         "projectUniqueName": "D:\\Projekte\\NAMERP-SOURCE\\Script\\NAMERP\\NAMERP.csproj",
         "projectName": "NAMERP",
         "projectPath": "D:\\Projekte\\NAMERP-SOURCE\\Script\\NAMERP\\NAMERP.csproj",
-        "packagesPath": "C:\\Users\\enten\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\xente\\.nuget\\packages\\",
         "outputPath": "D:\\Projekte\\NAMERP-SOURCE\\Script\\NAMERP\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\enten\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\xente\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -42,11 +42,11 @@
           "dependencies": {
             "AltV.Net": {
               "target": "Package",
-              "version": "[12.0.1, )"
+              "version": "[13.0.18, )"
             },
             "AltV.Net.Resources.Chat.Api": {
               "target": "Package",
-              "version": "[12.0.1, )"
+              "version": "[13.0.18, )"
             },
             "BCrypt.Net-Next": {
               "target": "Package",
@@ -54,7 +54,7 @@
             },
             "Npgsql": {
               "target": "Package",
-              "version": "[6.0.7, )"
+              "version": "[7.0.2, )"
             }
           },
           "imports": [
@@ -73,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
